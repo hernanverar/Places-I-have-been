@@ -17,6 +17,7 @@ PlacesToVisit.prototype.findCity = function (id) {
 function City (cityName, cityThigsToDo,) {
   this.cityName = cityName;
   this.cityThingsToDo = cityThigsToDo;
+  this.cityWeather = cityWeather
 }
 
 City.prototype.cityName = function() {
@@ -24,16 +25,28 @@ City.prototype.cityName = function() {
 };
 
 function listCitys(placesToVisitToDisplay) {
-  let citysDiv = document.querySelector("div#cityName");
-  citysDiv.innertext = null;
+  let citysDiv = document.querySelector("ul#cityName");
 
-  const ul = document.createElement('ul');
   Object.keys(placesToVisitToDisplay.citys).forEach(function(key){
     const city = placesToVisitToDisplay.findCity(key);
+
     const li = document.creteElement("li");
     li.append(city.cityName());
     li,setAttribute("id", city.id);
-    ul.append(li);
+    cityList.append(li);
   });
-  citysDiv.append(ul);
 }
+
+function handleFormSubmission(event) {
+  event.preventDefault();
+  const inputtedCityName = document.querySelector("input#new-cityName").value;
+  const inputtedCiyThinsToDo = document.querySelector("input#new-cityThingsToDo").value;
+  const inputtedCityWeather = document.querySelector("input#new-cityWeather").value;
+  let newContact = new City(inputtedCityName, inputtedCityThingsToDo, inputtedCityWeather);
+  addressBook.addCity(newCity);
+  listCitys(PlacesToVisit); 
+}
+
+window.addEventListener("load", function (){
+  document.querySelector("#new-city").addEventListener("click", handleFormSubmission);
+});
